@@ -74,7 +74,6 @@ def check_skierowanie( send_all_msg=True):
         #wait because of javascript 
         time.sleep(2)
         profil_zaufany_a.click()
-        #ok = driver.save_screenshot('C:\\Users\\patryk\\Documents\\GitHub\\SzczepionkiScrape\\login_screenshot1.png')
         #time.sleep(1)
         #wait for redirection
         print(f"{bcolors.WARNING}Waiting for redirection to PZ login page{bcolors.ENDC}")
@@ -101,13 +100,19 @@ def check_skierowanie( send_all_msg=True):
         page_pacjent  = WebDriverWait(driver,45).until( 
             EC.url_contains('https://pacjent.erejestracja.ezdrowie.gov.pl/wizyty')
                 )
+
         msg_body = ''
         time.sleep(1)
-        #look for bark wynikow
-        brak_wynikow = WebDriverWait(driver,45).until( 
-            EC.presence_of_element_located( (By.CLASS_NAME,'sc-eCssSg'))
-            )
-
+        
+        #wait for 'brak wynikow'
+        try:
+            brak_wynikow = WebDriverWait(driver,45).until( 
+                EC.presence_of_element_located( (By.CLASS_NAME,'sc-eCssSg'))
+                )
+        except Exception as e:
+            #if "brak wynikow not found"
+            pass
+        
         if ( ('Brak wyników' in driver.page_source ) ):
             print(f"{bcolors.FAIL}'Brak WYNIKÓW!!!!'{bcolors.ENDC}")
             if ( send_all_msg ):#send msg 
