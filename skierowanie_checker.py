@@ -40,7 +40,7 @@ def check_skierowanie( send_all_msg=True):
     PATH = os.path.join(current_dir,'chromedriver.exe')
     PATH = os.path.join(current_dir,'geckodriver.exe')
 
-    site = 'https://pacjent.erejestracja.ezdrowie.gov.pl/wizyty'
+    site = 'https://pacjent.erejestracja.ezdrowie.gov.pl/zaloguj'
 
 
     #do not show 
